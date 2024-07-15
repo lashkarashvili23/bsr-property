@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <>
-      <header className="flex justify-between items-center bg-slate-300 w-full p-5">
+      <header className="flex justify-between items-center bg-slate-600 text-white w-4/5 p-5">
         <div>Logo</div>
         <nav className="">
           <ul className="flex flex-row">

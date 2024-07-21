@@ -1,24 +1,19 @@
 import React from "react";
-import Link from "next/link";
 import Card from "./Card";
 import { Data } from "../Data";
 import { dataArray } from "../Data";
 
-interface MainSectionProps {
+interface ViewAllSectionProps {
   data: Data[];
 }
 
-const MainSection: React.FC<MainSectionProps> = (data) => {
+const ViewAllSection: React.FC<ViewAllSectionProps> = (data) => {
   // Slicing the first four objects from dataArray
-  const firstFourItems = dataArray.slice(0, 4);
+  const firstFourItems = dataArray.slice(0, 12);
   return (
     <>
-      <div className="bg-slate-100 flex flex-col items-center  text-xl h-96 w-4/5">
-        <div className="flex flex-row items-start justify-between w-full p-4">
-          <h2>Sales announcements</h2>
-          <Link href="/view-all">View all</Link>
-        </div>
-        <div className="bg-slate-100 w-full flex justify-between">
+      <div className="bg-slate-100 flex flex-col items-center text-xl h-full w-4/5 pt-4">
+        <div className="bg-slate-100 w-full flex flex-wrap justify-between">
           {firstFourItems.map((item, index) => (
             <Card
               key={index}
@@ -35,4 +30,4 @@ const MainSection: React.FC<MainSectionProps> = (data) => {
   );
 };
 
-export default MainSection;
+export default ViewAllSection;

@@ -11,7 +11,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ img, title, price, info, address }) => {
   return (
-    <div className="w-1/4 h-full flex flex-col items-center justify-center rounded-t-lg overflow-hidden mx-3 border border-inherit">
+    <div className="w-1/5 h-auto flex flex-col items-center justify-center rounded-t-lg overflow-hidden mx-5 my-5 border border-inherit">
       <div className="w-full h-4/5 ">
         <Image className="" src={img} width={500} height={500} alt={title} />
       </div>

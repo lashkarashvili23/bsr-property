@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Card from "./Card";
 import { Data } from "../Data";
@@ -9,8 +11,14 @@ interface MainSectionProps {
 }
 
 const MainSection: React.FC<MainSectionProps> = (data) => {
+  const router = useRouter(); // Initialize the router
   // Slicing the first four objects from dataArray
   const firstFourItems = dataArray.slice(0, 4);
+  const handleCardClick = (item: Data) => {
+    console.log("Card clicked:", item);
+    router.push(`/pages/${item.id}`); // Navigate to the detail page with the item's id
+  };
+
   return (
     <>
       <div className="bg-slate-100 flex flex-col items-center  text-xl h-96 w-4/5">
@@ -27,6 +35,7 @@ const MainSection: React.FC<MainSectionProps> = (data) => {
               price={item.price}
               info={item.info}
               address={item.address}
+              onClick={() => handleCardClick(item)} // Pass the click handler
             />
           ))}
         </div>

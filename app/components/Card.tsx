@@ -7,11 +7,22 @@ interface CardProps {
   price: number;
   info: string;
   address: string;
+  onClick: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ img, title, price, info, address }) => {
+const Card: React.FC<CardProps> = ({
+  img,
+  title,
+  price,
+  info,
+  address,
+  onClick,
+}) => {
   return (
-    <div className="w-1/5 h-auto flex flex-col items-center justify-center rounded-t-lg overflow-hidden mx-5 my-5 border border-inherit">
+    <div
+      onClick={onClick}
+      className="w-1/5 h-auto flex flex-col items-center justify-center rounded-t-lg overflow-hidden mx-5 my-5 border border-inherit cursor-pointer"
+    >
       <div className="w-full h-4/5 ">
         <Image className="" src={img} width={500} height={500} alt={title} />
       </div>

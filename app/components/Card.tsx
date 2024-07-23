@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { FaBuilding, FaMapMarkerAlt, FaTags } from "react-icons/fa";
 
 interface CardProps {
   img: string;
@@ -31,9 +32,30 @@ const Card: React.FC<CardProps> = ({
         className="flex flex-col items-start w-full h-26 bg-slate-100 text-base p-2 "
       >
         <div>{title}</div>
-        <div>{price} $</div>
-        <div className="text-sm">{info}</div>
-        <div className="text-sm">{address}</div>
+        <div>
+          <div className="flex pt-2">
+            <span className="pr-2 text-zinc-500 mt-1">
+              <FaTags />
+            </span>
+            <span>{price} $</span>
+          </div>
+        </div>
+        <div className="text-sm">
+          <div className="flex mt-1">
+            <span className="pr-2 text-zinc-500 mt-1">
+              <FaBuilding />
+            </span>
+            <span> {info}</span>
+          </div>
+        </div>
+        <div className="text-sm">
+          <div className="flex mt-1">
+            <span className="pr-2 text-zinc-500 mt-1">
+              <FaMapMarkerAlt />
+            </span>
+            <span>{address}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

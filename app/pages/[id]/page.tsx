@@ -1,5 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { notFound } from "next/navigation";
+import { FaBuilding, FaMapMarkerAlt, FaTags } from "react-icons/fa";
 import { dataArray } from "@/app/Data";
 import Header from "@/app/components/Header";
 import Search from "@/app/components/Search";
@@ -12,13 +14,7 @@ const DetailPage = () => {
   const item = dataArray.find((data) => data.id === id);
 
   if (!item) {
-    return (
-      <>
-        <div>Item not found</div>
-        <div>{pathname}</div>
-        <div>{id}</div>
-      </>
-    );
+    return notFound();
   }
 
   return (
@@ -32,9 +28,24 @@ const DetailPage = () => {
           </div>
           <div className="w-2/4 ml-10">
             <h1 className="text-2xl pb-2">{item.title}</h1>
-            <p className="text-xl pb-2">{item.price} $</p>
-            <p className="text-lg pb-2">{item.info}</p>
-            <p>{item.address}</p>
+            <div className="text-xl pb-2 flex">
+              <span className="pr-2 mt-1 text-zinc-500">
+                <FaTags />
+              </span>
+              {item.price} $
+            </div>
+            <div className="text-lg pb-2 flex">
+              <span className="pr-2 mt-1 text-zinc-500">
+                <FaBuilding />
+              </span>
+              {item.info}
+            </div>
+            <div className="pb-2 flex">
+              <span className="pr-2 mt-1 text-zinc-500">
+                <FaMapMarkerAlt />
+              </span>
+              {item.address}
+            </div>
           </div>
         </div>
       </section>

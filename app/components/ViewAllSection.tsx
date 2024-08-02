@@ -2,17 +2,41 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Card from "./Card";
-import { Data } from "../Data";
-import { dataArray } from "../Data";
+import { useEffect, useState } from "react";
+import { supabase } from "../supabaseClient";
 
-interface ViewAllSectionProps {
-  data: Data[];
-}
+export type Data = {
+  id: string;
+  img: string;
+  title: string;
+  price: number;
+  info: string;
+  address: string;
+};
 
-const ViewAllSection: React.FC<ViewAllSectionProps> = (data) => {
-  let router = useRouter(); // Initialize the router
-  // Slicing the first 12 objects from dataArray
-  const firstFourItems = dataArray.slice(0, 12);
+const ViewAllSection = () => {
+  const [apartments, setApartments] = useState<Data[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchApartments = async () => {
+      const { data, error } = await supabase.from("apartments").select("*");
+
+      if (error) {
+        console.error("Error fetching apartments:", error);
+      } else {
+        setApartments(data);
+      }
+      setLoading(false);
+    };
+
+    fetchApartments();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  const router = useRouter(); // Initialize the router
   const handleCardClick = (item: Data) => {
     router.push(`/pages/${item.id}`); // Navigate to the detail page with the item's id
   };
@@ -20,15 +44,15 @@ const ViewAllSection: React.FC<ViewAllSectionProps> = (data) => {
     <>
       <div className="bg-slate-100 flex flex-col items-center text-xl h-full w-4/5 pt-4">
         <div className="bg-slate-100 w-full flex flex-wrap justify-between">
-          {firstFourItems.map((item, index) => (
+          {apartments.map((apartment) => (
             <Card
-              key={index}
-              img={item.img}
-              title={item.title}
-              price={item.price}
-              info={item.info}
-              address={item.address}
-              onClick={() => handleCardClick(item)} // Pass the click handler
+              key={apartment.id}
+              img={apartment.img}
+              title={apartment.title}
+              price={apartment.price}
+              info={apartment.info}
+              address={apartment.address}
+              onClick={() => handleCardClick(apartment)} // Pass the click handler
             />
           ))}
         </div>

@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Card from "./Card";
-import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 
 export type Data = {
@@ -17,6 +16,7 @@ export type Data = {
 const ViewAllSection = () => {
   const [apartments, setApartments] = useState<Data[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter(); // Initialize the router
 
   useEffect(() => {
     const fetchApartments = async () => {
@@ -36,7 +36,7 @@ const ViewAllSection = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const router = useRouter(); // Initialize the router
+
   const handleCardClick = (item: Data) => {
     router.push(`/pages/${item.id}`); // Navigate to the detail page with the item's id
   };

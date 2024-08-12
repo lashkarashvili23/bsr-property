@@ -7,7 +7,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center  p-0 bg-slate-100">
       <Header />
       <Search />
-      <MainSection cardQuantity={4} />
+      <MainSection />
     </main>
   );
 }
